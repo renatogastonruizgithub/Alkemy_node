@@ -12,7 +12,9 @@ const logout= require('./routes/logoutRouter')
 const User = require('./models/User.js')
 const cookieParser = require('cookie-parser');
 require('dotenv').config({path:'./env/env'})
+const { body, validationResult } =  require ('express-validator');
 app.use(express.json())
+
 
 app.use(cookieParser())
 app.use('/api/ingresos',rutaIngreso)

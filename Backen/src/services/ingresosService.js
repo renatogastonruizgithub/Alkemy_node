@@ -4,7 +4,8 @@ const User = require('../models/User.js')
 
 //devuelve sumatoria parcial de todos los ingresos del usuario
 const sumaIngreso = async(id)=>{   
-  const suma= await Ingresos.findAll({where: { UserId: id },
+  
+      const suma= await Ingresos.findAll({where: { UserId: id },
     include: [{
       model: User,
       attributes:['name','id']
@@ -13,9 +14,8 @@ const sumaIngreso = async(id)=>{
       [sequelize.fn('sum', sequelize.col('monto')), 'total_ingresos'],
     ],
     raw: true
-  })
-    console.log(suma + " suma de bd")
- return suma 
+  }) 
+ return suma
 }
 
 //devuelve los ingresos paginados de un user
@@ -45,7 +45,8 @@ const create = async(ingresoDto,id)=>{
         concepto:ingresoDto.concepto,
         monto:ingresoDto.monto,
         fecha:ingresoDto.fecha,
-        UserId:id
+        UserId:id,
+        categoria:ingresoDto.categoria
        
     })    
     return  creado

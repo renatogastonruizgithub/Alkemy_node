@@ -8,6 +8,10 @@
      type: DataTypes.STRING,
      allowNull: false
    },
+   categoria: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
    monto: {
      type: DataTypes.DOUBLE,
      allowNull: false

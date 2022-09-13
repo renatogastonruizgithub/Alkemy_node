@@ -16,10 +16,10 @@ const create = async(model)=>{
          pass:passWithHash,
          email:model.email
         })    
-        return  creado
+        return  "Usuario creado" 
     }
     else{
-       return "Existe este usuario "
+       return "Existe este usuario"
     }
    
    }

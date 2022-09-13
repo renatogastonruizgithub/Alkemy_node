@@ -23,7 +23,8 @@ const crear=async (req,res)=>{
     const ingresoDto =  {
         concepto:req.body.concepto,
         monto:req.body.monto,
-        fecha:req.body.fecha
+        fecha:req.body.fecha,
+        categoria:req.body.categoria
     }
     const {id}=req.params
     const createIngreso= await servicioIngresos.create(ingresoDto,id)
@@ -42,7 +43,8 @@ const update=async (req,res)=>{
     const ingresoDto =  {
         concepto:req.body.concepto,
         monto:req.body.monto,
-        fecha:req.body.fecha
+        fecha:req.body.fecha,
+        categoria:req.body.categoria
     }   
     const updateIngreso= await servicioIngresos.update(id,ingresoDto)
     res.status(200).send({status:"ok",data:updateIngreso})

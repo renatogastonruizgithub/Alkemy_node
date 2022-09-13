@@ -3,19 +3,25 @@ const User = require('../models/User.js')
 const sequelize = require('../dataBase/connection')
 
 
+
+
 //sumatoria parcial de todos los egresos del usuario
-const sumaEgreso = async(id)=>{   
-  const suma= await Egresos.findAll({where: { UserId: id },
-    include: [{
-      model: User,
-      attributes:['name','id']
-    }],  
-    attributes: [      
-      [sequelize.fn('sum', sequelize.col('monto')), 'total_egresos'],
-    ],
-    raw: true
-  })
-  return suma
+const sumaEgreso = async(id)=>{    
+      
+      const suma= await Egresos.findAll({where: { UserId: id },
+        include: [{
+          model: User,
+          attributes:['name','id']
+        }],  
+        attributes: [      
+          [sequelize.fn('sum', sequelize.col('monto')), 'total_egresos'],
+        ],
+        raw: true
+      })
+      .catch(function (err) {
+         return err
+      });     
+      return suma
 }
 
 //devuelve los egresos paginados de un user
