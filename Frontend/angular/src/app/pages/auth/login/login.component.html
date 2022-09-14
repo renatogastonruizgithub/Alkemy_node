@@ -1,0 +1,90 @@
+<div class="container">
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="d-flex justify-content-center py-4">
+              <h3 class="logo d-flex text-light flex-column align-items-center w-auto">
+              Inicia sesion
+              </h3>
+            </div>
+  
+            <div class="card mb-3 shadow ">
+              <div class="card-body">
+                <form
+                  class="row g-3 needs-validation"
+                  [formGroup]="formulariod"
+                  (ngSubmit)="login()"
+                  novalidate
+                >
+                  <div class="col-12">
+                    <label for="yourUsername" class="form-label">Username</label>
+                    <input
+                      type="text"
+                      formControlName="usernameOrEmail"
+                      class="form-control"
+                      id="yourUsername"
+                    />
+                    <div class="input-group has-validation">
+                      <div *ngIf="usuario?.errors && usuario?.touched">
+                        <p
+                          *ngIf="usuario?.hasError('required')"
+                          class="alert-danger"
+                        >
+                          ingrese su usuario!
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="col-12">
+                    <label for="yourPassword" class="form-label">Password</label>
+                    <input
+                      type="password"
+                      formControlName="password"
+                      class="form-control has-validation"
+                    />
+                    <div *ngIf="passwords?.errors && passwords?.touched">
+                      <p
+                        *ngIf="passwords?.hasError('required')"
+                        class="alert-danger"
+                      >
+                        ingrese su password!
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                 
+                    <button class="btn btn-outline-success w-100" type="submit">
+                    
+                      <ng-template #valid>  Iniciar sesion</ng-template>
+                      
+                     <!--  <div *ngIf="cargando;else valid"  class="d-flex justify-content-center text-center content-spinner">
+                        <div class="spinner-border ml-1" role="status">      
+                        </div>                      
+                    </div> -->
+                    
+                    </button>
+                    <hr>
+                    <p class="text-center text-secondary">¿Aun no tienes cuenta?</p>
+                    <button
+                      class="btn btn-primary w-100 mt-2"
+                      routerLink="/registro"
+                      routerLinkActive="active"
+                    >
+                      Registrate
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
