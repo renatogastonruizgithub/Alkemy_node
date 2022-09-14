@@ -4,7 +4,7 @@ const servicioEgresos =require('../services/egresosService')
 const sumaEgreso= async(req,res)=>{
     const {id}=req.params
     const suma= await servicioEgresos.sumaEgreso(id)
-    return res.status(200).send({status:"ok",Egresos:suma})
+    return res.status(200).send({"data":suma})
  }
 
 const get= async(req,res)=>{
@@ -22,7 +22,8 @@ const crear=async (req,res)=>{
     const ingresoDto =  {
         concepto:req.body.concepto,
         monto:req.body.monto,
-        fecha:req.body.fecha
+        fecha:req.body.fecha,
+        categoria:req.body.categoria
     }
     const {id}=req.params    
     const createIngreso= await servicioEgresos.create(ingresoDto,id)
@@ -41,10 +42,11 @@ const update=async (req,res)=>{
     const ingresoDto =  {
         concepto:req.body.concepto,
         monto:req.body.monto,
-        fecha:req.body.fecha
+        fecha:req.body.fecha,
+        categoria:req.body.categoria
     }   
     const updateIngreso= await servicioEgresos.update(id,ingresoDto)
-    res.status(200).send({status:"ok",data:updateIngreso})
+    res.status(200).send({status:"ok","data":updateIngreso})
 }
  
 

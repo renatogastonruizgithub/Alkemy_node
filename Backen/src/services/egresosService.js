@@ -7,7 +7,10 @@ const sequelize = require('../dataBase/connection')
 
 //sumatoria parcial de todos los egresos del usuario
 const sumaEgreso = async(id)=>{    
-      
+  const IdUser = await Egresos.findOne({where:{UserId: id}})
+  
+  if(!IdUser) return "no existe usuario"
+  else{   
       const suma= await Egresos.findAll({where: { UserId: id },
         include: [{
           model: User,
@@ -23,9 +26,14 @@ const sumaEgreso = async(id)=>{
       });     
       return suma
 }
+}
 
 //devuelve los egresos paginados de un user
-const get = async(options,id)=>{   
+const get = async(options,id)=>{ 
+  const IdUser = await Egresos.findOne({where:{UserId: id}})
+  
+  if(!IdUser)return "no existe usuario"
+  else{  
   const { count, rows } = await Egresos.findAndCountAll({offset:options.offset,
     limit:options.limit,      
     where: { UserId: id },
@@ -43,6 +51,7 @@ const get = async(options,id)=>{
   })     
  return count, rows
 }
+}
 
 const create = async(ingresoDto,id)=>{ 
  const creado= await Egresos
@@ -50,7 +59,8 @@ const create = async(ingresoDto,id)=>{
       concepto:ingresoDto.concepto,
       monto:ingresoDto.monto,
       fecha:ingresoDto.fecha,
-      UserId:id
+      UserId:id,
+      categoria:ingresoDto.categoria
     })    
     return  creado
 }
@@ -67,11 +77,12 @@ const update =async(id,ingresoDto)=>{
                   .update({
                     concepto:ingresoDto.concepto,
                     monto:ingresoDto.monto,
-                    fecha:ingresoDto.fecha
+                    fecha:ingresoDto.fecha,
+                    categoria:ingresoDto.categoria
                   },{
                     where: {id}
                   })                  
-    return act
+    return "Actualizado"
     }
 
 

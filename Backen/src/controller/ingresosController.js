@@ -4,7 +4,7 @@ const servicioIngresos =require('../services/ingresosService')
 const sumaIngreso= async(req,res)=>{
     const {id}=req.params
     const suma= await servicioIngresos.sumaIngreso(id)
-    return res.status(200).send({status:"ok",Ingresos:suma})
+    return res.status(200).send({"data":suma})
  }
  
 
@@ -47,7 +47,7 @@ const update=async (req,res)=>{
         categoria:req.body.categoria
     }   
     const updateIngreso= await servicioIngresos.update(id,ingresoDto)
-    res.status(200).send({status:"ok",data:updateIngreso})
+    res.status(200).send({status:"ok","data":updateIngreso})
 }
  
 

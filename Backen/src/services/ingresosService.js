@@ -1,11 +1,16 @@
+const { json } = require('express')
 const sequelize = require('../dataBase/connection')
 const Ingresos = require('../models/Ingresos.js')
 const User = require('../models/User.js')
 
 //devuelve sumatoria parcial de todos los ingresos del usuario
 const sumaIngreso = async(id)=>{   
+  const IdUser = await Ingresos.findOne({where:{UserId: id}})
   
-      const suma= await Ingresos.findAll({where: { UserId: id },
+  if(!IdUser)return "no existe usuario"
+  else{
+ 
+  const suma= await Ingresos.findAll({where: { UserId: id },     
     include: [{
       model: User,
       attributes:['name','id']
@@ -14,12 +19,18 @@ const sumaIngreso = async(id)=>{
       [sequelize.fn('sum', sequelize.col('monto')), 'total_ingresos'],
     ],
     raw: true
-  }) 
- return suma
+  })
+  return suma
+}
+   
 }
 
 //devuelve los ingresos paginados de un user
 const get = async(options,id)=>{
+  const IdUser = await Ingresos.findOne({where:{UserId: id}})
+  
+  if(!IdUser)return "no existe usuario"
+  else{
     const { count, rows } = await Ingresos.findAndCountAll({offset:options.offset,
       limit:options.limit,      
       where: { UserId: id },
@@ -36,6 +47,7 @@ const get = async(options,id)=>{
       }
     })     
    return count, rows
+  }
 }
 
 
@@ -61,17 +73,23 @@ return borrado
 }
 
 const update =async(id,ingresoDto)=>{
+  const IfOperacion = await Ingresos.findOne({where:{id: id}})
+  if(!IfOperacion)return "no existe esta operacion"
+  else{
     const act= await Ingresos
-                  .update({
-                    concepto:ingresoDto.concepto,
-                    monto:ingresoDto.monto,
-                    fecha:ingresoDto.fecha
-                  },{
-                    where: {id}
-                  })                  
-    return act
-    }
+    .update({
+      concepto:ingresoDto.concepto,
+      monto:ingresoDto.monto,
+      fecha:ingresoDto.fecha,
+      categoria:ingresoDto.categoria
+    },{
+      where: {id}
+    })                  
+return "Actualizado"
+}
 
+  }
+   
 
     
 module.exports={get,create,delate,update,sumaIngreso}
