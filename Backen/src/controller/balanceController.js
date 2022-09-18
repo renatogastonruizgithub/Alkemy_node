@@ -1,10 +1,21 @@
 const servicioBalance =require('../services/balanceService')
 
-const balance= async(req,res)=>{
-    const {id}=req.params
+const balance= async (req,res)=>{
+   try{
 
-    const result= await servicioBalance.balance(id)
-    return res.status(200).send({status:"ok",Total_balance:result})
+    const {id}=req.params
+ 
+    const result= await servicioBalance.balance(id,res)
+
+    return res    
+    .status(200).json([{status:"ok",Total_balance:result.toString()}])
+
+   }
+    catch(e){
+        res.status(200).json([{Total_balance:"0"}])
+    }
+    
+
 }
 
 

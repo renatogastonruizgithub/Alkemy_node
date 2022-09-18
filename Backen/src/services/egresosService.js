@@ -9,7 +9,7 @@ const sequelize = require('../dataBase/connection')
 const sumaEgreso = async(id)=>{    
   const IdUser = await Egresos.findOne({where:{UserId: id}})
   
-  if(!IdUser) return "no existe usuario"
+  if(!IdUser)return res.status(404).json({error:"este usuarion no tiene engresos"})
   else{   
       const suma= await Egresos.findAll({where: { UserId: id },
         include: [{

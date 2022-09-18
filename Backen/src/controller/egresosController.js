@@ -2,9 +2,14 @@
 const servicioEgresos =require('../services/egresosService')
 
 const sumaEgreso= async(req,res)=>{
-    const {id}=req.params
-    const suma= await servicioEgresos.sumaEgreso(id)
-    return res.status(200).send({"data":suma})
+    try{
+        const {id}=req.params
+        const suma= await servicioEgresos.sumaEgreso(id,res)
+        return res.status(200).send({"data":suma})
+    }
+    catch(e){
+        res.status(200).json([{suma:"0"}])
+    }
  }
 
 const get= async(req,res)=>{

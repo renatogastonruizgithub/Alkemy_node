@@ -4,10 +4,10 @@ const Ingresos = require('../models/Ingresos.js')
 const User = require('../models/User.js')
 
 //devuelve sumatoria parcial de todos los ingresos del usuario
-const sumaIngreso = async(id)=>{   
-  const IdUser = await Ingresos.findOne({where:{UserId: id}})
+const sumaIngreso = async(id,res)=>{   
+  const IdUser1 = await Ingresos.findOne({where:{UserId: id}})
   
-  if(!IdUser)return "no existe usuario"
+  if(!IdUser1)return res.status(404).json({error:"este usuarion no tiene ingresos"})
   else{
  
   const suma= await Ingresos.findAll({where: { UserId: id },     

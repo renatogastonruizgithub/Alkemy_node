@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import {CookieService} from 'ngx-cookie-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LoginService } from 'src/app/services/auth.service';
+import { Login } from 'src/app/models/login';
+import { ToastrService   } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,40 +16,43 @@ export class LoginComponent implements OnInit {
   cargando:boolean=false;
   constructor(
     private router: Router,  
-    private formBuilder:FormBuilder
-   
+    private formBuilder:FormBuilder,
+   private loginService:LoginService,
+   private toast:ToastrService,
+   private cookieService: CookieService
   ) { 
 
     this.formulariod=this.formBuilder.group({     
-      password:['',[Validators.required]],
-      usernameOrEmail:['',[Validators.required]],
+      pass:['',[Validators.required]],
+      email:['',[Validators.required]],
     });
   }
   ngOnInit(): void {
   }
   get usuario(){
-    return this.formulariod.get('usernameOrEmail');
+    return this.formulariod.get('email');
   }
   get passwords(){
-    return this.formulariod.get('password');
+    return this.formulariod.get('pass');
   }
 
   login(){ 
-  /*   this.formulario.markAllAsTouched(); 
-    if(this.formulario.valid){
+  this.formulariod.markAllAsTouched(); 
+    if(this.formulariod.valid){
+      console.log(this.formulariod.value)
       this.cargando=true;
-      this.authService.login(this.formulario.value).subscribe( {
-        next:()=>{
-         this.cargando=false;           
-          this.tokenService.setToken(jwt.tokenDeAcceso);       
-          this.toastr.success("Inicio de sesion con exito ")
+      this.loginService.login(this.formulariod.value).subscribe({
+        next:(l:Login)=>{
+         this.cargando=false;
+        this.cookieService.set('token',l.data)
+          this.toast.success("Inicio de sesion con exito ") 
           this.router.navigate(['/admin']);  
         },
         error:(error:HttpErrorResponse)=>{       
-           this.toastr.warning("Usuario o contraseña no coinciden")
+            this.toast.warning("Usuario o contraseña no coinciden") 
           this.cargando=false;  
         }
       })
-    }*/
+    }
   } 
 }//fin class

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
 
-const login = async(model)=>{    
+const login = async(model,res)=>{    
  
     const ifExistUser =await User.findOne({where:{email:model.email}})
    
@@ -21,11 +21,11 @@ const login = async(model)=>{
           return token
       }
       else {
-        return "contraseña incorrecta" 
+        return  res.status(404) 
       }       
     }    
     else {
-      return "usuario no existe"
+      return res.status(404)
     }  
    }
 

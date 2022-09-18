@@ -4,14 +4,13 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent} 
-  /* canActivate:[GuardsDashboardGuard],
-  children:[ 
+ 
+ /*  children:[ 
     {path:'',component:InicioAdminComponent},
-    {path:"usuarios",component:UsuariosComponent},   
-    {path:"sobre",component:SobreComponent},    
+   
        
-    ]}
- */
+    ]} */
+
 ];
 
 @NgModule({

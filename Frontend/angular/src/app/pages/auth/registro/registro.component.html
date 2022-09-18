@@ -1,1 +1,95 @@
-<p>registro works!</p>
+
+
+<div class="container">  
+    <ol class="breadcrumb mt-3">
+      <li class="breadcrumb-item text-dark" routerLink="/login"
+      routerLinkActive="active" ><i class="bi bi-arrow-left mr-2"></i>Iniciar sesion</li>
+    </ol>
+    
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="card mb-3 shadow">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Registrate</h5>
+                </div>
+  
+                <form
+                  class="row g-3 needs-validation"
+                  [formGroup]="formularioR"
+                  (ngSubmit)="registro()"
+                >
+                  <div class="col-12 input-group-sm">
+                    <label for="yourUsername" class="form-label">Nombre</label>
+                    <input
+                      type="text"
+                      formControlName="name"
+                      class="form-control"
+                    />
+                    <div class="input-group has-validation">
+                      <div *ngIf="nombre?.errors && nombre?.touched">
+                        <p
+                          *ngIf="nombre?.hasError('required')"
+                          class="alert-danger"
+                        >
+                          ingrese su Nombre!
+                        </p>
+                      </div>
+                    </div>
+                  </div>                
+                  <div class="col-12 input-group-sm">
+                    <label for="yourPassword" class="form-label">Email</label>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="form-control has-validation"
+                    />
+                    <div *ngIf="email?.errors && email?.touched">
+                      <p *ngIf="email?.hasError('required')" class="alert-danger">
+                        ingrese su Email
+                      </p>
+                    </div>
+                    <div *ngIf="email?.invalid && email?.touched">
+                      <p  class="alert-danger">
+                       direccion de correo invalida
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-12 input-group-sm">
+                    <label for="yourPassword" class="form-label">password</label>
+                    <input
+                      type="password"
+                      formControlName="pass"
+                      class="form-control has-validation"
+                    />
+                    <div *ngIf="pass?.errors && pass?.touched">
+                      <p *ngIf="pass?.hasError('required')" class="alert-danger">
+                        ingrese su password!
+                      </p>
+                    </div>
+                  </div>                
+  
+                  <div class="col-12">
+                    <button class="btn btn-primary w-100 mt-3" type="submit">                   
+                      <ng-template #valid>Crear cuenta</ng-template>
+                      <div *ngIf="cargando;else valid"  class="d-flex justify-content-center text-center content-spinner">
+                        <div class="spinner-border ml-1" role="status">      
+                        </div>                      
+                      </div>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

@@ -1,5 +1,4 @@
 const express = require('express')
-const app= express()
 const sequelize= require('./dataBase/connection.js')
 const Ingresos =require('./models/Ingresos.js')
 const Egresos =require('./models/Egresos.js')
@@ -11,8 +10,16 @@ const auhtLogin= require('./routes/loginRouter')
 const logout= require('./routes/logoutRouter')
 const User = require('./models/User.js')
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 require('dotenv').config({path:'./env/env'})
 const { body, validationResult } =  require ('express-validator');
+const app= express()
+app.use(cors({
+    credentials: true,
+    origin: ["http://localhost:4200"],
+}));
+
+
 app.use(express.json())
 
 
@@ -30,9 +37,7 @@ app.use(User)
 
 app.set('port',process.env.PORT || 3000)
 app.listen(app.get('port'),() =>{
-console.log('ejecutando',app.get('port'))
-
-     
+console.log('ejecutando',app.get('port'))     
 });
 
 

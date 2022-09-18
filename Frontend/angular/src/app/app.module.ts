@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { RegistroComponent } from './pages/auth/registro/registro.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
+import { Interceptor } from './interceptors/interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,9 +22,17 @@ import { RegistroComponent } from './pages/auth/registro/registro.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule . forRoot ( )
   ],
-  providers: [],
+  providers: [CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

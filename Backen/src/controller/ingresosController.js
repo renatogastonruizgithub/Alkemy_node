@@ -2,9 +2,15 @@
 const servicioIngresos =require('../services/ingresosService')
 
 const sumaIngreso= async(req,res)=>{
-    const {id}=req.params
+    try{
+         const {id}=req.params
     const suma= await servicioIngresos.sumaIngreso(id)
     return res.status(200).send({"data":suma})
+    }
+   
+    catch(e){
+        res.status(200).json([{suma:"0"}])
+    }
  }
  
 

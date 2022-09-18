@@ -1,6 +1,6 @@
 const User = require('../models/User')
 
- const validId = async (req, res, next) => {
+ const validId = async  (req, res, next) => {
 try{
    
     const IdUser = await User.findOne({where:{id:req.params.id}})
@@ -9,7 +9,7 @@ try{
     
 } 
 catch(error) {
-    return res.status(400).send({status:error});
+    return res.status(400).send({status:error?.message});
 } 
 }
 module.exports=validId

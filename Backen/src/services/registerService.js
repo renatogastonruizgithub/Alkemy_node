@@ -2,7 +2,7 @@ const User = require('../models/User.js')
 const passCrypt= require('bcrypt')
 
 
-const create = async(model)=>{ 
+const create = async(model,res)=>{ 
     //encriptar pass
     const passWithHash= await passCrypt.hash(model.pass,10)
    
@@ -16,10 +16,10 @@ const create = async(model)=>{
          pass:passWithHash,
          email:model.email
         })    
-        return  "Usuario creado" 
+        return res.status(201)
     }
     else{
-       return "Existe este usuario"
+       return res.status(400)
     }
    
    }
