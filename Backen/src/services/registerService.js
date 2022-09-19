@@ -16,7 +16,7 @@ const create = async(model,res)=>{
          pass:passWithHash,
          email:model.email
         })    
-        return res.status(201)
+        return creado
     }
     else{
        return res.status(400)

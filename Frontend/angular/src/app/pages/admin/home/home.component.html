@@ -1,5 +1,176 @@
-<p>Hola!</p>
-<h1 *ngFor="let u of user">{{u.name}}</h1>
 
-<p>balance</p>
-<h1 *ngFor="let s of balance">{{s.Total_balance }}</h1>
+  
+ <section class="container">
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <div class="navDesktop">
+        <a class="navbar-brand">Holaa!</a>
+        <h1 class="nameDesktop" *ngFor="let u of user">{{ u.name }}</h1>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span>Salir</span>
+        </button>
+      </div>
+     
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <h1  *ngFor="let u of user">{{ u.name }}</h1>
+          <li class="nav-item">
+            <button (click)="logout()" type="button">
+              <span>Salir</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="card shadow bg-body rounded">
+    <h6>Balance disponible</h6>
+    <div class="card-body">
+      <h1 *ngFor="let s of balance">$ARS {{ s.Total_balance }}</h1>
+    </div>
+  </div>
+   
+  <div class="card shadow bg-body rounded mt-5 mb-5 p-3 ">
+    <div class="row align-items-center">
+      <div class="col-sm ">
+        <h2 class="">Registrar</h2>      
+      </div>
+      <div class="col-sm">      
+        <button type="button" class="btn btn-primary" (click)="Openmodal()" >Agregar operacion</button>
+      
+      </div>
+    </div>
+   
+  </div>
+
+   
+ </section>
+ 
+ <tabs >
+  <div class="container"> 
+    <tab tabTitle="Ingresos" active:true>
+      <app-ingresos  ></app-ingresos>
+    </tab>
+    <tab tabTitle="Egresos" >
+      <app-egresos > </app-egresos>
+    </tab>
+      </div> 
+  <tabs>
+
+
+    <div class="modal" tabindex="-1" role="dialog" *ngIf="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Registrar</h5>
+            <button type="button" (click)="Openmodal()" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form
+            class="row g-3 needs-validation"
+            [formGroup]="formulario"
+            (ngSubmit)="registro()"
+            novalidate
+          >
+            <div class="col-12">
+              <label for="yourUsername" class="form-label">concepto</label>
+              <input
+                type="text"
+                formControlName="concepto"
+                class="form-control form-control-sm"
+                id="yourUsername"
+              />
+            <!--   <div class="input-group has-validation">
+                <div *ngIf="usuario?.errors && usuario?.touched">
+                  <p
+                    *ngIf="usuario?.hasError('required')"
+                    class="alert-danger"
+                  >
+                    ingrese su concepto!
+                  </p>
+                </div>
+              </div> -->
+            </div>
+            <div class="col-12">
+              <label for="yourPassword" class="form-label">monto</label>
+              <input
+                type="text"
+                formControlName="monto"
+                class="form-control has-validation form-control-sm"
+              />
+            <!--   <div *ngIf="passwords?.errors && passwords?.touched">
+                <p
+                  *ngIf="passwords?.hasError('required')"
+                  class="alert-danger"
+                >
+                  ingrese su monto!
+                </p>
+              </div> -->
+            </div>
+            <div class="col-12">
+              <label for="yourPassword" class="form-label">fecha</label>
+              <input
+                type="date"
+                formControlName="fecha"
+                class="form-control has-validation form-control-sm"
+              />
+            <!--   <div *ngIf="passwords?.errors && passwords?.touched">
+                <p
+                  *ngIf="passwords?.hasError('required')"
+                  class="alert-danger"
+                >
+                  ingrese su fecha!
+                </p>
+              </div> -->
+            </div>
+            <div class="col-12">
+              <select
+                formControlName="categoria"
+                class="form-select form-select-sm mb-3"
+                aria-label=".form-select-lg example"
+              >
+                <option selected>Categorias</option>
+                <option *ngFor="let c of categoria">{{ c }}</option>
+              </select>
+             <!--  <div *ngIf="roles?.errors && roles?.touched">
+                <p *ngIf="roles?.hasError('required')" class="alert-danger">
+                  ingrese su categoria!
+                </p>
+              </div> -->
+            </div>
+            <div class="col-12">
+              <select
+                formControlName="tipo"
+                class="form-select form-select-sm mb-3"
+                aria-label=".form-select-lg example"
+              >
+                <option selected>Tipo de Movimiento</option>
+                <option *ngFor="let t of tipo">{{ t }}</option>
+              </select>
+             <!--  <div *ngIf="roles?.errors && roles?.touched">
+                <p *ngIf="roles?.hasError('required')" class="alert-danger">
+                  ingrese su categoria!
+                </p>
+              </div> -->
+            </div>
+          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="registro()" >Save changes</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  

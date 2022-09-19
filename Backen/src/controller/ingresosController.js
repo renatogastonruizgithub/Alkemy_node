@@ -1,7 +1,7 @@
 
 const servicioIngresos =require('../services/ingresosService')
 
-const sumaIngreso= async(req,res)=>{
+/* const sumaIngreso= async(req,res)=>{
     try{
          const {id}=req.params
     const suma= await servicioIngresos.sumaIngreso(id)
@@ -12,25 +12,40 @@ const sumaIngreso= async(req,res)=>{
         res.status(200).json([{suma:"0"}])
     }
  }
- 
+  */
 
-const get= async(req,res)=>{
+const getIngresos= async(req,res)=>{
 const{page=0,size=10}=req.query
 let options={
 limit:+size,//parceo a number
 offset:(+size)*(+page)
 }  
 const {id}=req.params
-const all= await servicioIngresos.get(options,id)
+const all= await servicioIngresos.getIngresos(options,id)
 return res.status(200).send({status:"ok",page:page,data:all})
 }
+
+const getEgresos= async(req,res)=>{
+    const{page=0,size=10}=req.query
+    let options={
+    limit:+size,//parceo a number
+    offset:(+size)*(+page)
+    }  
+    const {id}=req.params
+    const all= await servicioIngresos.getEgresos(options,id)
+    return res.status(200).send({status:"ok",page:page,data:all})
+    }
+    
+
+
 
 const crear=async (req,res)=>{    
     const ingresoDto =  {
         concepto:req.body.concepto,
         monto:req.body.monto,
         fecha:req.body.fecha,
-        categoria:req.body.categoria
+        categoria:req.body.categoria,
+        tipo:req.body.tipo
     }
     const {id}=req.params
     const createIngreso= await servicioIngresos.create(ingresoDto,id)
@@ -59,5 +74,5 @@ const update=async (req,res)=>{
 
 
 
-module.exports={get,crear,delate,update,sumaIngreso}
+module.exports={getIngresos,getEgresos,crear,delate,update}
 

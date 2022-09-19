@@ -8,7 +8,7 @@ const balance= async (req,res)=>{
     const result= await servicioBalance.balance(id,res)
 
     return res    
-    .status(200).json([{status:"ok",Total_balance:result.toString()}])
+    .status(200).json([{status:"ok",Total_balance:result}])
 
    }
     catch(e){
@@ -16,8 +16,8 @@ const balance= async (req,res)=>{
     }
     
 
-}
+} 
 
-
+ 
 
 module.exports={balance}

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Login } from '../models/login';
 import {CookieService} from 'ngx-cookie-service';
 import { Registro } from '../models/registro';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 url:string = 'http://localhost:3000/api/login/session'
 url2:string ='http://localhost:3000/api/register/user'
-constructor(private http:HttpClient, private cookieService: CookieService) { }
+constructor(private router:Router, private http:HttpClient, private cookieService: CookieService) { }
 
 login(loginUsuario: Login): Observable<Login> {
   return this.http.post<Login>(this.url, loginUsuario);
@@ -69,5 +70,10 @@ public getUserId():Number {
   return usernID;
 }
 
+public logout():void
+{
+   this.cookieService.delete('token')
+  this.router.navigate(['/login']);
+}
 
 }

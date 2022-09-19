@@ -1,0 +1,14 @@
+.modal{
+    display: block;
+    background-color: rgba(0, 0, 0, 0.596);
+  
+}
+
+
+@media (min-width: 769px) and (max-width: 1440px){
+    .nameDesktop {
+      display: none;
+    }
+  }
+
+  .navDesktop{}

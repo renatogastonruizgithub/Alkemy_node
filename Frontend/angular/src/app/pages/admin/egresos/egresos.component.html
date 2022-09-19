@@ -1,0 +1,25 @@
+<div class="table-responsive sm" >
+  <h3>Movimientos </h3>
+    <table class="table">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">concepto</th>
+                <th scope="col">categoria</th>
+                <th scope="col">fecha</th>
+                <th scope="col">monto</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of egresos">
+              <tr>               
+                <td>{{item.concepto}}</td>
+                <td>{{item.categoria}}</td>
+                <td>{{item.fecha }}</td>
+                <td>$ARS {{item.monto}}</td>
+                <button type="button" style="margin-right: 1rem; background-color: rgb(255, 193, 7);" class="btn btn-warning">editar</button>
+                <button type="button" style="background-color: crimson;" class="btn btn-danger">elimiar</button>
+              </tr>             
+            </tbody>
+          </table>
+    </table>
+  </div>

@@ -12,6 +12,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { Interceptor } from './interceptors/interceptor.service';
+import { TabModule } from 'angular-tabs-component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { Interceptor } from './interceptors/interceptor.service';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    TabModule,
     ToastrModule . forRoot ( )
   ],
   providers: [CookieService,

@@ -1,9 +1,7 @@
 
  const sequelize=require('../dataBase/connection')
- const Egresos =require('./Egresos')
-const Ingresos=require('./Ingresos')
-
  const { DataTypes } = require('sequelize');
+const Operaciones = require('./Operaciones');
  
  
  const User = sequelize.define('User', { 
@@ -23,10 +21,8 @@ const Ingresos=require('./Ingresos')
  }, {
  tableName:"User"
  });
- User.hasMany(Egresos ,{foreignKey:"UserId"})
- Egresos.belongsTo(User,{foreignKey:"UserId"} )
- 
- User.hasMany(Ingresos,{foreignKey:"UserId"} )
- Ingresos.belongsTo(User ,{foreignKey:"UserId"})
+
+ User.hasMany(Operaciones,{foreignKey:"UserId"} )
+ Operaciones.belongsTo(User ,{foreignKey:"UserId"})
 
  module.exports=User
